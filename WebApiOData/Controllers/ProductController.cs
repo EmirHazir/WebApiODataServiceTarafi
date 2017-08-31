@@ -12,14 +12,22 @@ namespace WebApiOData.Controllers
 {
     public class ProductController : ApiController
     {
+        public ProductController()
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+        }
         private NORTHWNDEntities db = new NORTHWNDEntities();
 
         //Queryable ile içine bu sorguyu sadece OrderBy yapabileceği iznini verdim
-        [Queryable(AllowedQueryOptions =AllowedQueryOptions.OrderBy)]
-        public IQueryable<Product> GetAllProducts()
+        //[Queryable(AllowedQueryOptions =AllowedQueryOptions.OrderBy)]
+        //public IQueryable<Product> GetAllProducts()
+        //{
+        //    return db.Products;
+        //}
+
+        public List<Product> GetAllProducts()
         {
-            db.Configuration.ProxyCreationEnabled = false;
-            return db.Products;
+            return db.Products.ToList();
         }
     }
 }
